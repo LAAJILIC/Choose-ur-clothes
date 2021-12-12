@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 //connect is a HOC
-import { createSelector, createStructuredSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { auth } from '../../firebase/firebase.utils';
@@ -13,7 +13,7 @@ import './header.styles.scss';
 const Header = ({ currentUser, hidden }) => (
     <div className='header'>
       <Link className='logo-container' to='/'>
-      <img className='img-logo' src='https://svgshare.com/i/ciK.svg' />
+      <img className='img-logo' src='https://svgshare.com/i/ciK.svg' alt='logo'/>
       </Link>
      <div className='options'>
        <Link className='option' to='/shop'>SHOP</Link>
