@@ -1,11 +1,11 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
-
-import './sign-up.styles.scss';
+import { signUpStart } from '../../redux/user/user.actions';
+import { SignUpContainer, TitleContainer } from './sign-up.styles';
+import UserActionTypes from '../../redux/user/user.types';
 
 class SignUp extends React.Component {
  constructor(){
@@ -19,21 +19,11 @@ class SignUp extends React.Component {
  };
   handleSubmit = async e => {
       e.preventDefault();
+      const { signUpStart } = this.props;
       const { displayName, email, password, confirmPassword } = this.state;
       if (password !== confirmPassword) { alert("Passwords don't match");
         return;}
-        try {
-            const { user } = await auth.createUserWithEmailAndPassword(email, password);
-            
-            await createUserProfileDocument(user, { displayName });
-            
-            this.setState({   //to clear the form
-                displayName: '',
-                email: '',
-                password: '',
-                confirmPassword: ''
-            }); //to clear the form
-        } catch (error) { console.log(error);}
+        signUpStart({ displayName, email, password});
   };
    handleChange = e => {
        const { name, value } = e.target;
@@ -44,8 +34,8 @@ class SignUp extends React.Component {
   render(){
       const { displayName, email, password, confirmPassword } = this.state;
       return(
-        <div className='sign-up'>
-        <h2 className='title'>Don't have an account yet?</h2>
+        <SignUpContainer>
+        <TitleContainer>Don't have an account yet?</TitleContainer>
         <span>Sign up with your email und password</span>
           <form className='sign-up-form' onSubmit={this.handleSubmit}>
           
@@ -56,8 +46,11 @@ class SignUp extends React.Component {
 
            <CustomButton type='submit'>SIGN UP</CustomButton>
           </form>
-        </div>
-      )
+        </SignUpContainer>
+      );
   }
 }
-export default SignUp;
+const mapDispatchToProps = dispatch => ({
+  signUpStart: UserCredentials => dispatch(signUpStart(UserCredentials))
+})
+export default connect(null, mapDispatchToProps)(SignUp);

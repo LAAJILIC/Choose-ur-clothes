@@ -1,22 +1,22 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import './menu-item.styles.scss';
+import { MenuItemContainer, BackGroundImage, SubtitleContainer, ContentContainer, TitleContainer, } from './menu-item.styles';
 
 const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
   //Functional component does't include a state
-    <div  className={`${size} menu-item`}
+    <MenuItemContainer  className={`${size}`}
     onClick={()=> history.push(`${match.url}${linkUrl}`)}
     >
-    <div  className='background-image'
+    <BackGroundImage
     style={{
         backgroundImage: `url(${imageUrl})`
     }}
     />
-    <div className='content'>
-    <h1 className='title'>{title.toUpperCase()}</h1>
-    <span className='subtitle'>BUY NOW</span>
-    </div>
-    </div>
+    <ContentContainer>
+    <TitleContainer>{title.toUpperCase()}</TitleContainer>
+    <SubtitleContainer>BUY NOW</SubtitleContainer>
+    </ContentContainer>
+    </MenuItemContainer>
 );
 
 export default withRouter(MenuItem);
