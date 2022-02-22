@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MenuItemContainer = styled.div`
-min-width: 30%;
+    min-width: 30%;
     height: 240px;
     flex: 1 1 auto;
     display: flex;
@@ -22,6 +22,10 @@ min-width: 30%;
   
     &:last-child {
       margin-left: 7.5px;
+    }
+
+    @media screen and (max-width: 800px) {
+        height: 200px;
     }
 `;
 
@@ -53,10 +57,18 @@ export const ContentContainer = styled.div`
       cursor: pointer;
       opacity: 0.9;
     }
+
+    @media screen and (max-width: 800px) {
+        width: 70px;
+    }
 `;
 export const SubtitleContainer = styled.span`
         font-weight: lighter;
         font-size: 16px;
+       
+        @media screen and (max-width: 800px) {
+        width: 50px;
+    }
       
 `;
 export const TitleContainer = styled.h1`
